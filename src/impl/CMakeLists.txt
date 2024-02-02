@@ -6,16 +6,17 @@ FILE(GLOB_RECURSE INCLUDES CONFIGURE_DEPENDS
 
 SET(PLUGIN_RC "${CMAKE_SOURCE_DIR}/src/resources/plugin.rc")
 
-ADD_LIBRARY(devue_plugin STATIC
+ADD_LIBRARY(devue_plugin SHARED
 	${INCLUDES}
 	${PLUGIN_CORE}
 	${PLUGIN_RC}
 
 	"devue_plugin_impl.cpp"
+	"dds/dds.cpp"
 )
 
 # SET FILENAME
-SET_TARGET_PROPERTIES(devue_plugin PROPERTIES OUTPUT_NAME "dv_plg_template")
+SET_TARGET_PROPERTIES(devue_plugin PROPERTIES OUTPUT_NAME "dv_plg_devue_official")
 
 TARGET_INCLUDE_DIRECTORIES(devue_plugin PRIVATE "${PLUGIN_LIB_DIR}")
 TARGET_INCLUDE_DIRECTORIES(devue_plugin PRIVATE "${PLUGIN_LIB_DIR}/glm")

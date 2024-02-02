@@ -1,6 +1,7 @@
 #include "devue_plugin_impl.hpp"
 #include "devue_plugin.hpp"
 #include "glm/gtx/normal.hpp"
+#include "dds/dds.hpp"
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "lib/tinyobjloader/include/tiny_obj_loader.h"
@@ -27,9 +28,10 @@ std::vector<file_type> devue_plugin_impl::impl_get_model_types() {
 
 std::vector<file_type> devue_plugin_impl::impl_get_texture_types() {
     return {
-        { "JPEG",   ".jpg;.jpeg"},
-        { "PNG",    ".png"},
-        { "Bitmap", ".bmp"},
+        { "JPEG",               ".jpg;.jpeg" },
+        { "PNG",                ".png"       },
+        { "Bitmap",             ".bmp"       },
+        { "DirectDraw Surface", ".dds"       }
     };
 }
 
@@ -139,6 +141,28 @@ devue_plugin_model devue_plugin_impl::impl_import_model(const std::filesystem::p
 }
 
 devue_plugin_texture devue_plugin_impl::impl_import_texture(const std::filesystem::path& filepath) {
+    if (filepath.extension() == ".dds")
+        return import_dds(filepath);
+    else
+        return import_stb(filepath);
+}
+
+devue_plugin_texture devue_plugin_impl::import_dds(const std::filesystem::path& filepath) {
+    dds dds;
+
+    if (!dds.parse(filepath.string(), true))
+        throw std::runtime_error(dds.get_error());
+
+    devue_plugin_texture texture;
+    texture.width = dds.width;
+    texture.height = dds.height;
+    texture.components = dds.components;
+    texture.data = std::move(dds.pixels);
+
+    return texture;
+}
+
+devue_plugin_texture devue_plugin_impl::import_stb(const std::filesystem::path& filepath) {
     devue_plugin_texture texture;
 
     stbi_set_flip_vertically_on_load(true);

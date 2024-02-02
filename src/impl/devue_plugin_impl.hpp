@@ -18,6 +18,7 @@ namespace devue::plugins {
         devue_plugin_texture   impl_import_texture(const std::filesystem::path& filepath);
 
     private:
-        // You can add your own stuff here
+        devue_plugin_texture import_dds(const std::filesystem::path& filepath);
+        devue_plugin_texture import_stb(const std::filesystem::path& filepath);
     };
 }
