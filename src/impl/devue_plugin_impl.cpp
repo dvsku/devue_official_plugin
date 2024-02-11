@@ -22,16 +22,16 @@ void devue_plugin_impl::impl_init(devue_plugin& plugin) {
 
 std::vector<file_type> devue_plugin_impl::impl_get_model_types() {
     return {
-        { "Wavefront object", ".obj"}
+        { "Wavefront object", "*.obj"}
     };
 }
 
 std::vector<file_type> devue_plugin_impl::impl_get_texture_types() {
     return {
-        { "JPEG",               ".jpg;.jpeg" },
-        { "PNG",                ".png"       },
-        { "Bitmap",             ".bmp"       },
-        { "DirectDraw Surface", ".dds"       }
+        { "JPEG",               "*.jpg *.jpeg" },
+        { "PNG",                "*.png"        },
+        { "Bitmap",             "*.bmp"        },
+        { "DirectDraw Surface", "*.dds"        }
     };
 }
 
