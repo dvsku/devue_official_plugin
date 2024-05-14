@@ -1,5 +1,6 @@
 #include "devue_plugin_impl.hpp"
 #include "devue_plugin.hpp"
+#include "plugin.hpp"
 #include "glm/gtx/normal.hpp"
 #include "dds/dds.hpp"
 
@@ -14,10 +15,10 @@
 using namespace devue::plugins;
 
 void devue_plugin_impl::impl_init(devue_plugin& plugin) {
-    plugin.name    = "devue official plugin";
-    plugin.author  = "Nikola `dvsku` Stojsin";
-    plugin.website = "https://github.com/dvsku/devue";
-    plugin.version = "1.0.0";
+    plugin.name    = PLG_NAME;
+    plugin.author  = PLG_AUTHOR;
+    plugin.website = "https://github.com/dvsku/devue_official_plugin";
+    plugin.version = PLG_VERSION_STR;
 }
 
 std::vector<file_type> devue_plugin_impl::impl_get_model_types() {
