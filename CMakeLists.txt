@@ -52,5 +52,5 @@ IF(WIN32 AND "${CMAKE_SIZEOF_VOID_P}" STREQUAL "8")
         "${DEVUE_PLUGIN_CORE}/*.cpp"
     )
 
-    ADD_SUBDIRECTORY("src")
+    ADD_SUBDIRECTORY("source")
 ENDIF()
